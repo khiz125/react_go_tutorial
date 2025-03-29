@@ -22,6 +22,7 @@ vendor/
 .DS_Store
 
 # Go specific files
+main.template
 # Compiled binary for packages and commands
 /bin/
 # Output of the go coverage tool, specifically when used with LiteIDE
