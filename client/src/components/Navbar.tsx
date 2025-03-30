@@ -20,7 +20,7 @@ const Navbar: React.FC<Props> = ({ colorMode, setColorMode }) => {
 
   return (
     <Container maxW={"900px"}>
-      <Box bg={`${colorMode === "light" ? "#333" : "white"}`} px={4} my={4} borderRadius={5}>
+      <Box bg={`${colorMode === "light" ? "#333" : "white"}`} transition="background 0.2s ease-in-out" px={4} my={4} borderRadius={5}>
         <Flex h={16} alignItems="center" justifyContent="space-between">
           <Flex
             justifyContent={"center"}
@@ -36,7 +36,7 @@ const Navbar: React.FC<Props> = ({ colorMode, setColorMode }) => {
               Daily Tasks
             </Text>
             {/* Toggle Color Mode */}
-            <Button onClick={toggleColorMode}>
+            <Button onClick={toggleColorMode} transition="background 0.2s ease-in-out">
               {colorMode === "light" ? <IoMoon /> : <LuSun size={20} />}
             </Button>
           </Flex>
