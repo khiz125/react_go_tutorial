@@ -23,7 +23,7 @@ func main() {
 	handler := presentation.NewTodoHandler(uc)
 
 	app.Get("/api/todos", handler.GetTodos)
-	app.Get("/api/todos/done", handler.GetDoneTodos) // 完了したTODOアイテムを取得
+	app.Get("/api/todos/done", handler.GetDoneTodos)
 	app.Get("/api/todos/not-done", handler.GetNotDoneTodos)
 	app.Post("/api/todos", handler.CreateTodo)
 	app.Patch("/api/todos/:id", handler.UpdateTodo)
