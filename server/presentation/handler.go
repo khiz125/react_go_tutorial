@@ -37,6 +37,40 @@ func (h *TodoHandler) GetTodos(c *fiber.Ctx) error {
 	return c.JSON(todos)
 }
 
+func (h *TodoHandler) GetDoneTodos(c *fiber.Ctx) error {
+	completed := true
+	filter := &domain.TodoFilter{Completed: &completed}
+
+	todos, err := h.useCase.GetTodos(context.Background(), filter)
+	if err != nil {
+			log.Printf("Error fetching todos: %v", err)
+			return c.Status(http.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
+	}
+	
+	if len(todos) == 0 {
+			return c.Status(http.StatusNotFound).JSON(fiber.Map{"error": "There are no completed todos"})
+	}
+
+	return c.JSON(todos)
+}
+
+func (h *TodoHandler) GetNotDoneTodos(c *fiber.Ctx) error {
+	completed := false
+	filter := &domain.TodoFilter{Completed: &completed}
+
+	todos, err := h.useCase.GetTodos(context.Background(), filter)
+	if err != nil {
+			log.Printf("Error fetching todos: %v", err)
+			return c.Status(http.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
+	}
+	
+	if len(todos) == 0 {
+			return c.Status(http.StatusNotFound).JSON(fiber.Map{"error": "There are no not completed todos"})
+	}
+
+	return c.JSON(todos)
+}
+
 func (h *TodoHandler) CreateTodo(c *fiber.Ctx) error {
 	todo := new(domain.Todo)
 	if err := c.BodyParser(todo); err !=nil {

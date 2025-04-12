@@ -6,9 +6,8 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"react_go_tutorial/server/infrastructure"
-	"react_go_tutorial/server/useCase"
 	"react_go_tutorial/server/presentation"
-
+	"react_go_tutorial/server/useCase"
 )
 
 func main() {
@@ -24,6 +23,8 @@ func main() {
 	handler := presentation.NewTodoHandler(uc)
 
 	app.Get("/api/todos", handler.GetTodos)
+	app.Get("/api/todos/done", handler.GetDoneTodos) // 完了したTODOアイテムを取得
+	app.Get("/api/todos/not-done", handler.GetNotDoneTodos)
 	app.Post("/api/todos", handler.CreateTodo)
 	app.Patch("/api/todos/:id", handler.UpdateTodo)
 	app.Delete("/api/todos/:id", handler.DeleteTodo)
